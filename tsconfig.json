@@ -12,13 +12,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-<<<<<<< HEAD
-    "expo-env.d.ts"
-  ]
-}
-=======
     "expo-env.d.ts",
     "nativewind-env.d.ts"
   ]
 }
->>>>>>> 4637c54 (Removed nested repo my-expo-app from tracking)
