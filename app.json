@@ -22,6 +22,10 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
+<<<<<<< HEAD
+=======
+       "bundler": "metro",
+>>>>>>> 4637c54 (Removed nested repo my-expo-app from tracking)
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },

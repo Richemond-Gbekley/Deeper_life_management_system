@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -21,4 +22,11 @@ export default function RootLayout() {
       <StatusBar style="auto" />
     </ThemeProvider>
   );
+=======
+import { Stack } from "expo-router";
+import '../global.css';
+
+export default function RootLayout() {
+  return <Stack />;
+>>>>>>> 4637c54 (Removed nested repo my-expo-app from tracking)
 }
