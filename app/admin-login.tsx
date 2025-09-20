@@ -98,7 +98,7 @@ export default function AdminRoleSelection() {
             key={role.role}
             onPress={() => {
               console.log("Selected:", role.role);
-               router.push("/admin-dashboard");
+               router.push("./admin-dashboard");
             }}
             className="bg-white border border-blue-200 rounded-xl p-4 mb-3 shadow-sm"
           >

@@ -26,7 +26,7 @@ export default function MemberLogin() {
     console.log("Login Data:", { name, division });
 
     // Navigate to dashboard (pass params if needed)
-    router.push("/member-dashboard");
+    router.push("./member-dashboard");
   };
 
   return (
@@ -104,7 +104,7 @@ export default function MemberLogin() {
         </View>
         <TouchableOpacity
           className="w-full bg-blue-600 rounded-lg py-3 items-center"
-          onPress={() => router.push("/member-login")}
+          onPress={() => router.push("./member-login")}
         >
           <Text className="text-white font-semibold">Continue as Member</Text>
         </TouchableOpacity>

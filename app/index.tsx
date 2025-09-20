@@ -25,7 +25,7 @@ export default function LoginSelection() {
         </View>
         <TouchableOpacity
           className="w-full bg-blue-600 rounded-lg py-3 items-center"
-          onPress={() => router.push("/member-login")}
+          onPress={() => router.push("./member-login")}
         >
           <Text className="text-white font-semibold">Continue as Member</Text>
         </TouchableOpacity>
@@ -39,7 +39,7 @@ export default function LoginSelection() {
         </View>
         <TouchableOpacity
           className="w-full bg-blue-600 rounded-lg py-3 items-center"
-          onPress={() => router.push("/admin-login")}
+          onPress={() => router.push("./admin-login")}
         >
           <Text className="text-white font-semibold">Continue as Admin</Text>
         </TouchableOpacity>
