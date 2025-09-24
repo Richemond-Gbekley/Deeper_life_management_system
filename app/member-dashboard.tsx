@@ -1,5 +1,6 @@
+import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 interface MemberDashboardProps {
   memberName: string;
@@ -43,8 +44,8 @@ const notifications = [
   { message: "New Bible Study material available", time: "2d ago", urgent: false },
   { message: "Youth program registration open", time: "3d ago", urgent: false },
 ];
-
 export default function MemberDashboard({ memberName, division, onBack }: MemberDashboardProps) {
+  const router = useRouter();
   return (
     <View className="flex-1 bg-gradient-to-b from-blue-50 to-white">
       {/* Header */}
@@ -168,6 +169,37 @@ export default function MemberDashboard({ memberName, division, onBack }: Member
             </View>
           ))}
         </View>
+
+        {/* Actions */}
+<View className="mt-6">
+  {/* View My Profile */}
+  <TouchableOpacity
+    className="bg-white border border-blue-200 rounded-xl shadow-sm p-4 mb-3 flex-row items-center"
+    onPress={() => router.push("./member-dashboard/my-profile")}
+  >
+    <Ionicons name="person-circle-outline" size={24} color="#1e3a8a" />
+    <Text className="ml-3 text-blue-900 font-medium">View / Update My Profile</Text>
+  </TouchableOpacity>
+
+  {/* View Other Members */}
+  <TouchableOpacity
+    className="bg-white border border-blue-200 rounded-xl shadow-sm p-4 mb-3 flex-row items-center"
+    onPress={() => router.push("./member-dashboard/view-members")}
+  >
+    <Ionicons name="people-outline" size={24} color="#1e3a8a" />
+    <Text className="ml-3 text-blue-900 font-medium">View Other Members</Text>
+  </TouchableOpacity>
+
+  {/* Settings */}
+  <TouchableOpacity
+    className="bg-white border border-blue-200 rounded-xl shadow-sm p-4 flex-row items-center"
+    onPress={() => router.push("./member-dashboard/settings")}
+  >
+    <Ionicons name="settings-outline" size={24} color="#1e3a8a" />
+    <Text className="ml-3 text-blue-900 font-medium">Settings</Text>
+  </TouchableOpacity>
+</View>
+
       </ScrollView>
     </View>
   );

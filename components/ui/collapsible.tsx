@@ -1,45 +1,73 @@
-import { PropsWithChildren, useState } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+"use client";
 
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import React, { useRef, useState, useEffect } from "react";
+import {
+  Animated,
+  LayoutAnimation,
+  Platform,
+  Pressable,
+  StyleSheet,
+  UIManager,
+  View,
+  Text,
+} from "react-native";
+import { ChevronDown } from "lucide-react-native";
 
-export function Collapsible({ children, title }: PropsWithChildren & { title: string }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const theme = useColorScheme() ?? 'light';
+// Enable LayoutAnimation on Android
+if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
+
+type CollapsibleProps = {
+  title: string;
+  children: React.ReactNode;
+  defaultOpen?: boolean;
+};
+
+export function Collapsible({ title, children, defaultOpen = false }: CollapsibleProps) {
+  const [open, setOpen] = useState(defaultOpen);
+
+  const toggle = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    setOpen(!open);
+  };
 
   return (
-    <ThemedView>
-      <TouchableOpacity
-        style={styles.heading}
-        onPress={() => setIsOpen((value) => !value)}
-        activeOpacity={0.8}>
-        <IconSymbol
-          name="chevron.right"
-          size={18}
-          weight="medium"
-          color={theme === 'light' ? Colors.light.icon : Colors.dark.icon}
-          style={{ transform: [{ rotate: isOpen ? '90deg' : '0deg' }] }}
-        />
+    <View style={styles.container}>
+      <Pressable style={styles.header} onPress={toggle}>
+        <Text style={styles.title}>{title}</Text>
+        <Animated.View style={{ transform: [{ rotate: open ? "180deg" : "0deg" }] }}>
+          <ChevronDown size={20} color="#1e3a8a" />
+        </Animated.View>
+      </Pressable>
 
-        <ThemedText type="defaultSemiBold">{title}</ThemedText>
-      </TouchableOpacity>
-      {isOpen && <ThemedView style={styles.content}>{children}</ThemedView>}
-    </ThemedView>
+      {open && <View style={styles.content}>{children}</View>}
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  heading: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
+  container: {
+    marginVertical: 6,
+    borderWidth: 1,
+    borderColor: "#d1d5db", // gray-300
+    borderRadius: 8,
+    overflow: "hidden",
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 12,
+    backgroundColor: "#f3f4f6", // gray-100
+    alignItems: "center",
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#1e3a8a", // deep blue
   },
   content: {
-    marginTop: 6,
-    marginLeft: 24,
+    padding: 12,
+    backgroundColor: "white",
   },
 });
